@@ -26,18 +26,17 @@ int main(void)
 	if(player1_points > player2_points)
 	{
 		printf("Player 1 is the winner!\n");
-		return 0;
 	}
 	else if(player1_points < player2_points)
 	{
-		printf("Player 2 is the winner!\n");
-		return 0;
+		printf("Player 2 is the winner!");
 	}
 	else
 	{
-		printf("Tie!\n");
-		return 0;
+		printf("Tie!");
 	}
+
+	return 0;
 }
 
 int calc_points(string player_word, const int point_table[])
