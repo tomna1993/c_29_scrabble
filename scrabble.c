@@ -1,5 +1,9 @@
 #include <cs50.h>
+#include <ctype.h>
 #include <stdio.h>
+#include <string.h>
+
+int calc_points(string player_word, const int point_table[]);
 
 int main(void)
 {
@@ -13,32 +17,46 @@ int main(void)
 	string player2 = get_string("Player 2: ");
 	
 	// Calculate the points of the first player
-	int player1_points = calc_points(player1);
+	int player1_points = calc_points(player1, POINTS);
 	
 	// Calculate the points of the second player
-	int player2_points = calc_points(player2);
+	int player2_points = calc_points(player2, POINTS);
 
 	// Print out the winner
 	if(player1_points > player2_points)
 	{
-		printf("Player 1 is the winner!");
+		printf("Player 1 is the winner!\n");
 		return 0;
 	}
 	else if(player1_points < player2_points)
 	{
-		printf("Player 2 is the winner!");
+		printf("Player 2 is the winner!\n");
 		return 0;
 	}
 	else
 	{
-		printf("Tie!");
+		printf("Tie!\n");
 		return 0;
 	}
 }
 
-int calc_points(string player_word)
+int calc_points(string player_word, const int point_table[])
 {
 	int points = 0;
 
+	for(int i = 0, length = strlen(player_word); i < length; i++)
+	{
+		tolower(player_word[i]);
+
+		if(player_word[i] < 'a' || player_word[i] > 'z')
+		{
+			printf("Invalid word!\n");
+			return 0;
+		}
+
+		points += point_table[player_word[i] - 97];
+	}
+
+	printf("Points: %i\n", points);
 	return points;
 }
